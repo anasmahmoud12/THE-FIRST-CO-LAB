@@ -18,8 +18,8 @@ void setup(){
 void loop (){
 
  
-  if (strcom&&x==1){
-    --x;
+  if (strcom){
+    
     inputstr.toUpperCase(); 
  Serial.println(inputstr);   
     for (int i=0;i<inputstr.length();++i){
@@ -49,7 +49,8 @@ if(inputstr[i+1]!=' '){
 
     }
   
-
+strcom=false;
+    inputstr="";
 }
 
 
