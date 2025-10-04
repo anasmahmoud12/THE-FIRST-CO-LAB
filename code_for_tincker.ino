@@ -89,7 +89,7 @@ void letter(){
 void serialEvent() {
   while (Serial.available()) {
     char inChar = (char)Serial.read();
-    if (inChar == 'b') strcom = true;
+    if (inChar == '\n') strcom = true;
     else inputstr += inChar;
   }
 }
