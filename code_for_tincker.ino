@@ -1,11 +1,24 @@
 String inputstr="";
     bool strcom=false;
     int x=1;
-    int bin3=3;int unit=250;
-    String morse[]={
+    int bin3=3;int unit=1000;
+    String morseletters[]={
   ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
   "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-",
   "..-", "...-", ".--", "-..-", "-.--", "--.."};
+String morsenumbers[] = {
+  "-----",  
+  ".----",  
+  "..---",  
+  "...--", 
+  "....-",  
+  ".....",  
+  "-....",  
+  "--...",  
+  "---..",  
+  "----."  
+};
+
   String code;
 
 void setup(){
@@ -19,7 +32,7 @@ void loop (){
 
  
   if (strcom){
-   
+    
     inputstr.toUpperCase(); 
  Serial.println(inputstr);   
     for (int i=0;i<inputstr.length();++i){
@@ -28,9 +41,17 @@ void loop (){
 space();
 continue;
         }
+      
+if (a>='A'&&a<='Z'){
+  code=morseletters[a-'A'];
+}
+    if (a>='0'&& a<='9'){
+       code=morsenumbers[a-'0'];
+    }
+
+      
 
 
-code=morse[a-'A'];
 for (int j=0;j<code.length();++j){
     char c=code.charAt(j);
     if (c=='.'){
@@ -46,9 +67,6 @@ if(inputstr[i+1]!=' '){
     letter();
 }
 }
-      if (i!=inputstr.length()-1){
-        letter();
-      }
 
     }
   
@@ -57,7 +75,6 @@ strcom=false;
 }
 
 
-  
   
 }
 
