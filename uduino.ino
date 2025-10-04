@@ -1,7 +1,7 @@
 String inputstr="";
     bool strcom=false;
     int x=1;
-    int bin3=3;int unit=1000;
+    int bin3=3;int unit=500;
     String morseletters[]={
   ".-", "-...", "-.-.", "-..", ".", "..-.", "--.", "....", "..", ".---",
   "-.-", ".-..", "--", "-.", "---", ".--.", "--.-", ".-.", "...", "-",
