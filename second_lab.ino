@@ -1,41 +1,46 @@
-#define push_buttom 12
-#define grean 4
+#define inputPin 12
+#define green 4
 #define red 5
 
+bool lastState = HIGH;
+bool ledState = LOW;
+
 void setup() {
-Serial.begin(9600);
-  pinMode(push_buttom,INPUT_PULLUP);
-  pinMode(grean,OUTPUT);
-  pinMode(red,OUTPUT);
+  Serial.begin(9600);
+  pinMode(inputPin, INPUT_PULLUP);
+  pinMode(green, OUTPUT);
+  pinMode(red, OUTPUT);
+  digitalWrite(red, HIGH);
+  digitalWrite(green, LOW);
 }
 
 void loop() {
-  bool state;
-  state=debouce( push_buttom);
-  Serial.println(state);
-  
-  if (state){
-      digitalWrite(red,HIGH);
-        digitalWrite(grean,LOW);
+  bool currentState = debounce(inputPin);
 
+  if (currentState != lastState) {
+    if (currentState == LOW) { 
+      ledState = !ledState;   
+      if (ledState) {
+        digitalWrite(red, LOW);
+        digitalWrite(green, HIGH);
+      } else {
+        digitalWrite(red, HIGH);
+        digitalWrite(green, LOW);
+      }
+    }
+    lastState = currentState;
   }
-  else{
-     digitalWrite(red,LOW);
-        digitalWrite(grean,HIGH);
-  }
-    
 }
-bool debouce(int p){
-  bool state;
-  bool prevstate=digitalRead(p);
-  Serial.println(prevstate);
 
-  for (int i=0;i<10;++i){
+bool debounce(int pin) {
+  bool state;
+  bool prevState = digitalRead(pin);
+  for (int i = 0; i < 10; ++i) {
     delay(5);
-    state=digitalRead(p);
-    if (state!=prevstate){
-      i=0;
-      prevstate=state;
+    state = digitalRead(pin);
+    if (state != prevState) {
+      i = 0;
+      prevState = state;
     }
   }
   return state;
